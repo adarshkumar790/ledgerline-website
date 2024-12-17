@@ -7,11 +7,17 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      animation: {
+        blink: "blink 2s infinite",
+      },
+      keyframes: {
+        blink: {
+          "25%, 50%, 100%": { opacity: "1" },
+          "25%, 75%": { opacity: "0" },
+        },
       },
     },
   },
+  darkMode: 'class', // Enables dark mode when the `dark` class is added
   plugins: [],
 };

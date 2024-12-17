@@ -1,101 +1,120 @@
+"use client";
+import { useState, useEffect } from "react";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline"; // Import icons
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  return (
+    <div className={`font-sans relative h-screen ${isDarkMode ? "dark" : ""}`}>
+      {/* Full Background Video */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/ledgerbg1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute top-0 left-0 w-full h-full opacity-80 dark:bg-black dark:opacity-90"></div>
+      </div>
+
+      {/* Navigation Bar */}
+      <header className="relative z-10 flex justify-between items-center p-6 shadow-md">
+        <div className="text-3xl font-bold text-rose-500">
+          <span className="tracking-tighter">ledgerline Technology</span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <nav>
+          <ul className="flex space-x-6 text-red-900 font-bold dark:text-gray-300">
+            <li>
+              <a href="#" className="hover:text-gray-900 dark:hover:text-white">
+                About us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-900 dark:hover:text-white">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-900 dark:hover:text-white">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-900 dark:hover:text-white">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-900 dark:hover:text-white">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        
+        <button
+          onClick={toggleDarkMode}
+          className="border border-red-600 text-red-800 px-3 py-1 rounded flex items-center justify-center hover:bg-red-600 hover:text-white transition"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {isDarkMode ? (
+            <SunIcon className="h-6 w-6" />
+          ) : (
+            <MoonIcon className="h-6 w-6" /> 
+          )}
+        </button>
+      </header>
+
+    
+      <section className="relative z-10 flex items-center h-[80vh] px-8 md:px-16">
+  
+  <div className="flex-1">
+    <h1 className="text-4xl md:text-5xl font-bold text-rose-900 mb-4 leading-tight dark:text-rose-400">
+      Your Partner in Web3 and <br />
+      Advanced AI for Enterprise Development
+    </h1>
+    <p className="text-slate-200 text-lg mb-6 leading-relaxed dark:text-gray-300">
+      From Web3 and blockchain to GenAI and beyond, we offer the
+      enterprise-grade solutions you need to innovate and succeed in the
+      evolving crypto landscape.
+    </p>
+    <button className="bg-gray-600 text-white px-6 py-3 rounded hover:bg-red-700 transition w-fit">
+      CONSULT OUR EXPERTS
+    </button>
+  </div>
+
+  
+  <div className="flex-1 flex justify-end items-center h-full">
+    <Image
+      src="/ledger7.gif"
+      alt="Ledger Gif"
+      width={400} 
+      height={400}
+      unoptimized
+      className="object-contain bg-transparent"
+    />
+  </div>
+</section>
+
     </div>
   );
 }
